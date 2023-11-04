@@ -1,7 +1,12 @@
 package tn.esprit.rh.achat.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
 import tn.esprit.rh.achat.entities.Produit;
 import tn.esprit.rh.achat.entities.Stock;
@@ -14,6 +19,9 @@ import java.util.List;
 
 @Service
 @Slf4j
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 public class ProduitServiceImpl implements IProduitService {
 
 	@Autowired
@@ -24,6 +32,8 @@ public class ProduitServiceImpl implements IProduitService {
 	CategorieProduitRepository categorieProduitRepository;
 
 	@Override
+	@Test
+	@Order(1)
 	public List<Produit> retrieveAllProduits() {
 		List<Produit> produits = (List<Produit>) produitRepository.findAll();
 		for (Produit produit : produits) {
